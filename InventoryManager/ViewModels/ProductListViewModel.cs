@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 using Caliburn.Micro;
 
@@ -94,10 +95,33 @@ namespace InventoryManager.ViewModels
             _windowManager.ShowDialog(EditProductModel);
         }
 
+        public void DeleteProduct()
+        {
+            DirectoryInfo d = new DirectoryInfo(_path);
+            try
+            {
+                File.Delete(_path + string.Format("{0}.xml", RemoveWhitespace(SelectedProduct.Name)));
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("ERROR: Cannot delete file. Exception: {0}", e);
+            }
+            LoadProductsFromFile();
+        }
+
         public void Handle(Dictionary<string, Product> message)
         {
             if(!message.ContainsKey(_saveProductMessage)) return;
             LoadProductsFromFile();
+        }
+
+        private string RemoveWhitespace(string inputString)
+        {
+            return
+                inputString.ToCharArray()
+                    .Where(c => !char.IsWhiteSpace(c))
+                    .Select(c => c.ToString())
+                    .Aggregate((a, b) => a + b);
         }
     }
 }

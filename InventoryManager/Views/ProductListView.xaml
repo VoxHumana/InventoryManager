@@ -6,9 +6,10 @@
              MinWidth="150" MinHeight="75">
     <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <xcdg:DataGridControl ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8">
             <xcdg:DataGridControl.View>
@@ -21,5 +22,6 @@
         </StackPanel>
         <Button x:Name="CreateNewProduct" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Center" Margin="4" Padding="4">Create new product</Button>
         <Button x:Name="EditProduct" HorizontalAlignment="Right" Grid.Row="2" VerticalAlignment="Center" Margin="4" Padding="4">Edit product</Button>
+        <Button x:Name="DeleteProduct" HorizontalAlignment="Right" Grid.Row="3" VerticalAlignment="Center" Margin="4" Padding="4">Delete product</Button>
     </Grid>
 </UserControl>
