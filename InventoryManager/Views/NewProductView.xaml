@@ -1,32 +1,32 @@
 ﻿<UserControl x:Class="InventoryManager.Views.NewProductView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
     <Grid Margin="25">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-            Product Name:
-        </Label>
-        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-            Product Price:
-        </Label>
-        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-            Product Cost:
-        </Label>
-        <xctk:WatermarkTextBox x:Name="ProductName" Watermark="Enter product name" Grid.Row="0" Grid.Column="1" Margin="10"/>
-        <xctk:WatermarkTextBox x:Name="ProductPrice" Watermark="Enter product selling price" Grid.Row="1" Grid.Column="1" Margin="10" />
-        <xctk:WatermarkTextBox x:Name="ProductCost" Watermark="Enter product cost" Grid.Row="2" Grid.Column="1" Margin="10" />
-        <Button x:Name="SaveProductToFile" IsCancel="True" Grid.Column="1" Grid.Row="3" Margin="10" Padding="8,4">
-            Save product
-        </Button>
+        <TextBox x:Name="ProductName" 
+                 controls:TextBoxHelper.Watermark="Enter product name" 
+                 Grid.Row="0" 
+                 Margin="10"/>
+        <TextBox x:Name="ProductPrice" 
+                 controls:TextBoxHelper.Watermark="Enter product selling price" 
+                 Grid.Row="1" 
+                 Margin="10" />
+        <TextBox x:Name="ProductCost" 
+                 controls:TextBoxHelper.Watermark="Enter product cost" 
+                 Grid.Row="2" 
+                 Margin="10" />
+        <Button x:Name="SaveProductToFile" 
+                Content="Confirm"
+                IsCancel="True" 
+                Grid.Row="3" 
+                Margin="10" 
+                Padding="8,4"/>       
     </Grid>
 </UserControl>

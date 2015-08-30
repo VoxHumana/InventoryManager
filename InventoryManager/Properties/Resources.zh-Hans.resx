@@ -132,4 +132,13 @@
   <data name="Name" xml:space="preserve">
     <value>名称</value>
   </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>乘积量</value>
+  </data>
+  <data name="Create new product" xml:space="preserve">
+    <value>创建产品</value>
+  </data>
+  <data name="Edit product" xml:space="preserve">
+    <value>编辑产品</value>
+  </data>
 </root>

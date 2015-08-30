@@ -2,20 +2,22 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             MinWidth="150" MinHeight="75">
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
     <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <DataGrid ItemsSource="{Binding ProductList}" 
                   SelectedItem="{Binding SelectedProduct}"
-                  IsReadOnly="True"
+                  IsReadOnly="False"
                   Grid.Column="0" 
-                  HorizontalAlignment="Left" 
-                  VerticalAlignment="Center" 
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Stretch" 
                   Margin="8">        
         </DataGrid>
         <StackPanel Orientation="Horizontal" 
@@ -23,37 +25,43 @@
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Center" 
                     Margin="4">
-            <xctk:IntegerUpDown x:Name="Quantity" 
-                                Value="{Binding Quantity}" 
+            <xctk:IntegerUpDown x:Name="Quantity"                                  
                                 Watermark="Enter quantity" 
-                                Minimum="1" 
-                                FormatString="N0" 
+                                Minimum="1"  
                                 HorizontalAlignment="Center" 
-                                MinWidth="150" 
+                                MinWidth="100" 
                                 Margin="4" 
                                 Padding="4,0"/>
-            <Button x:Name="SelectThisProduct" 
+            <Button x:Name="SelectThisProduct"
+                    Content="Add to inventory"
+                    Style="{DynamicResource SquareButtonStyle}"
                     HorizontalAlignment="Center" 
                     Margin="8" 
-                    Padding="8,4">Add to inventory</Button>
+                    Padding="8,4"/>
         </StackPanel>
         <Button x:Name="CreateNewProduct" 
+                Content="增加产品"
+                Style="{DynamicResource SquareButtonStyle}"
                 HorizontalAlignment="Right" 
                 Grid.Row="1" 
                 VerticalAlignment="Center" 
                 Margin="4" 
-                Padding="4">增加产品</Button>
+                Padding="4"/>
         <Button x:Name="EditProduct" 
+                Content="Edit product"
+                Style="{DynamicResource SquareButtonStyle}"
                 HorizontalAlignment="Right" 
                 Grid.Row="2" 
                 VerticalAlignment="Center" 
                 Margin="4" 
-                Padding="4">Edit product</Button>
-        <Button x:Name="DeleteProduct" 
+                Padding="4"/>
+        <Button x:Name="DeleteProduct"
+                Content="Delete product"
+                Style="{DynamicResource SquareButtonStyle}"
                 HorizontalAlignment="Right" 
                 Grid.Row="3" 
                 VerticalAlignment="Center" 
                 Margin="4" 
-                Padding="4">Delete product</Button>
+                Padding="4"/>
     </Grid>
 </UserControl>

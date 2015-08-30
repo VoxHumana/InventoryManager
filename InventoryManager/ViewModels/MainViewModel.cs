@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel.Composition;
 using Caliburn.Micro;
 
 namespace InventoryManager.ViewModels
@@ -6,6 +7,7 @@ namespace InventoryManager.ViewModels
     [Export(typeof(MainViewModel))]
     public class MainViewModel : PropertyChangedBase
     {
+        public ObservableCollection<string> Languages { get; set; }
         public InventoryViewModel NewInventoryModel { get; set; }
         public ProductListViewModel ProductListModel { get; set; }
         [ImportingConstructor]
@@ -13,6 +15,7 @@ namespace InventoryManager.ViewModels
         {
             NewInventoryModel = newInventoryModel;
             ProductListModel = productListModel;
+            Languages = new ObservableCollection<string>() {"en", "zh-Hans", "de", "ru", "fr", "br"};
         }
     }
 }

@@ -5,23 +5,39 @@ using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Xml.Serialization;
 using Caliburn.Micro;
 
 namespace InventoryManager.ViewModels
 {
-    [Export(typeof(ProductListViewModel))]
+    [Export(typeof (ProductListViewModel))]
     public class ProductListViewModel : PropertyChangedBase, IHandle<Dictionary<string, Product>>
     {
-        private string _saveProductMessage = "saveProductMessage";
-        private readonly string _path = Environment.CurrentDirectory + "\\products\\";
         private readonly IEventAggregator _eventAggregator;
-        readonly IWindowManager _windowManager = new WindowManager();
-        private readonly XmlSerializer _xmlSerializer = new XmlSerializer(typeof(Product));
+        private readonly string _path = Environment.CurrentDirectory + "\\products\\";
+        private readonly IWindowManager _windowManager = new WindowManager();
+        private readonly XmlSerializer _xmlSerializer = new XmlSerializer(typeof (Product));
         private ObservableCollection<Product> _productList;
+
+        private string _quantity;
+        private readonly string _saveProductMessage = "saveProductMessage";
+        private Product _selectedProduct;
+
+        [ImportingConstructor]
+        public ProductListViewModel(IEventAggregator eventAggregator, NewProductViewModel newProductViewModel,
+            EditProductViewModel editProductModel)
+        {
+            _eventAggregator = eventAggregator;
+            NewProductModel = newProductViewModel;
+            EditProductModel = editProductModel;
+            _eventAggregator.Subscribe(this);
+            LoadProductsFromFile();
+        }
 
         public NewProductViewModel NewProductModel { get; set; }
         public EditProductViewModel EditProductModel { get; set; }
+
         public ObservableCollection<Product> ProductList
         {
             get { return _productList; }
@@ -31,7 +47,7 @@ namespace InventoryManager.ViewModels
                 NotifyOfPropertyChange(() => ProductList);
             }
         }
-        private Product _selectedProduct;
+
         public Product SelectedProduct
         {
             get { return _selectedProduct; }
@@ -42,8 +58,7 @@ namespace InventoryManager.ViewModels
             }
         }
 
-        private int _quantity;
-        public int Quantity
+        public string Quantity
         {
             get { return _quantity; }
             set
@@ -52,19 +67,16 @@ namespace InventoryManager.ViewModels
                 NotifyOfPropertyChange(() => Quantity);
             }
         }
-        [ImportingConstructor]
-        public ProductListViewModel(IEventAggregator eventAggregator, NewProductViewModel newProductViewModel, EditProductViewModel editProductModel)
+
+        public void Handle(Dictionary<string, Product> message)
         {
-            _eventAggregator = eventAggregator;
-            NewProductModel = newProductViewModel;
-            EditProductModel = editProductModel;
-            _eventAggregator.Subscribe(this);
+            if (!message.ContainsKey(_saveProductMessage)) return;
             LoadProductsFromFile();
         }
 
         public void SelectThisProduct()
         {
-            var inventoryEntry = new ProductInventoryEntry(SelectedProduct, Quantity);
+            var inventoryEntry = new ProductInventoryEntry(SelectedProduct, Convert.ToInt32(Quantity));
             _eventAggregator.PublishOnUIThread(inventoryEntry);
         }
 
@@ -73,15 +85,15 @@ namespace InventoryManager.ViewModels
             _windowManager.ShowDialog(NewProductModel);
         }
 
-        public void LoadProductsFromFile()
+        private void LoadProductsFromFile()
         {
-            DirectoryInfo d = new DirectoryInfo(_path);
-            ObservableCollection<Product> productList = new ObservableCollection<Product>();
-            foreach (FileInfo productFile in d.GetFiles("*.xml"))
+            var d = new DirectoryInfo(_path);
+            var productList = new ObservableCollection<Product>();
+            foreach (var productFile in d.GetFiles("*.xml"))
             {
-                using (FileStream stream = new FileStream(_path + productFile.Name, FileMode.Open))
+                using (var stream = new FileStream(_path + productFile.Name, FileMode.Open))
                 {
-                    Product product = (Product)_xmlSerializer.Deserialize(stream);
+                    var product = (Product) _xmlSerializer.Deserialize(stream);
                     productList.Add(product);
                 }
             }
@@ -91,31 +103,34 @@ namespace InventoryManager.ViewModels
         public void EditProduct()
         {
             if (SelectedProduct == null) return;
-            _eventAggregator.PublishOnUIThread(new Dictionary<string, Product>() {{ "editProductMessage", SelectedProduct }} );
+            _eventAggregator.PublishOnUIThread(new Dictionary<string, Product> {{"editProductMessage", SelectedProduct}});
             _windowManager.ShowDialog(EditProductModel);
         }
 
         public void DeleteProduct()
         {
-            DirectoryInfo d = new DirectoryInfo(_path);
+            try
+            {
+                var d = new DirectoryInfo(_path);
+            }
+            catch (SecurityException securityException)
+            {
+                Debug.WriteLine("ERROR: Security exception was caught");
+            }
             try
             {
                 File.Delete(_path + string.Format("{0}.xml", RemoveWhitespace(SelectedProduct.Name)));
             }
-            catch (Exception e)
+            catch (DirectoryNotFoundException directoryNotFoundException)
             {
-                Debug.WriteLine("ERROR: Cannot delete file. Exception: {0}", e);
+                Debug.WriteLine("ERROR: Could not find directory");
             }
+            
+
             LoadProductsFromFile();
         }
 
-        public void Handle(Dictionary<string, Product> message)
-        {
-            if(!message.ContainsKey(_saveProductMessage)) return;
-            LoadProductsFromFile();
-        }
-
-        private string RemoveWhitespace(string inputString)
+        private static string RemoveWhitespace(string inputString)
         {
             return
                 inputString.ToCharArray()

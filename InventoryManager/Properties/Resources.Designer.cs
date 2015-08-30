@@ -70,6 +70,24 @@ namespace InventoryManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create new product.
+        /// </summary>
+        internal static string Create_new_product {
+            get {
+                return ResourceManager.GetString("Create new product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit product.
+        /// </summary>
+        internal static string Edit_product {
+            get {
+                return ResourceManager.GetString("Edit product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inventory.
         /// </summary>
         internal static string Inventory {
@@ -93,6 +111,15 @@ namespace InventoryManager.Properties {
         internal static string Product {
             get {
                 return ResourceManager.GetString("Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity.
+        /// </summary>
+        internal static string Quantity {
+            get {
+                return ResourceManager.GetString("Quantity", resourceCulture);
             }
         }
         

@@ -5,8 +5,18 @@
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              Title ="Main inventory window"
+             GlowBrush="{DynamicResource AccentColorBrush}"
+             ResizeMode="CanResizeWithGrip"
              Height="500"
              Width="600">
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Language:"/>
+                <controls:SplitButton ItemsSource="{Binding Languages}" />
+            </StackPanel>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
     <Grid>
         <controls:MetroAnimatedSingleRowTabControl>
             <controls:MetroTabItem Header="Inventory">
