@@ -13,9 +13,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <DataGrid ItemsSource="{Binding InventoryEntries}"
-                  IsReadOnly="True"
-                  HorizontalAlignment ="Left"
-                  VerticalAlignment="Center" 
+                  IsReadOnly="True" 
                   Grid.Column="0" 
                   Margin="8">
         </DataGrid>

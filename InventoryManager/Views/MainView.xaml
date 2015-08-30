@@ -7,18 +7,20 @@
              Title ="Main inventory window"
              Height="500"
              Width="600">
-    <Grid Margin="15">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50*" />
-            <ColumnDefinition Width="50*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100*" />
-        </Grid.RowDefinitions>
-        <vw:InventoryView 
-            cal:Bind.Model="{Binding NewInventoryModel}" 
-            Grid.Column="0" 
-            HorizontalAlignment="Left" 
-            VerticalAlignment="Top"/>
+    <Grid>
+        <controls:MetroAnimatedSingleRowTabControl>
+            <controls:MetroTabItem Header="Inventory">
+                <vw:InventoryView
+                    cal:Bind.Model="{Binding NewInventoryModel}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top" />
+            </controls:MetroTabItem>
+            <controls:MetroTabItem Header="Products">
+                <vw:ProductListView
+                    cal:Bind.Model="{Binding ProductListModel}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"/>
+            </controls:MetroTabItem>
+        </controls:MetroAnimatedSingleRowTabControl>
     </Grid>
 </controls:MetroWindow>
