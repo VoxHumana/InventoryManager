@@ -1,7 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-
-namespace InventoryManager.Views
+﻿namespace InventoryManager.Views
 {
     /// <summary>
     /// Interaction logic for MainView.xaml
