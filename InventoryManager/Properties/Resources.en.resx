@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Buying cost" xml:space="preserve">
+  <data name="BuyingCost" xml:space="preserve">
     <value>Buying cost</value>
   </data>
   <data name="Inventory" xml:space="preserve">
@@ -132,13 +132,34 @@
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
   </data>
-  <data name="Selling price" xml:space="preserve">
+  <data name="SellingPrice" xml:space="preserve">
     <value>Selling price</value>
   </data>
-  <data name="Create new product" xml:space="preserve">
+  <data name="CreateNewProduct" xml:space="preserve">
     <value>Create new product</value>
   </data>
-  <data name="Edit product" xml:space="preserve">
+  <data name="EditProduct" xml:space="preserve">
     <value>Edit product</value>
+  </data>
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>Inventory Manager</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DeleteProduct" xml:space="preserve">
+    <value>Delete product</value>
+  </data>
+  <data name="AddToInventory" xml:space="preserve">
+    <value>Add to inventory</value>
+  </data>
+  <data name="EnterQuantity" xml:space="preserve">
+    <value>Enter quantity</value>
+  </data>
+  <data name="SelectThisProduct" xml:space="preserve">
+    <value>English</value>
   </data>
 </root>

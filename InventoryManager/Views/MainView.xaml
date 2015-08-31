@@ -1,14 +1,15 @@
 ﻿<controls:MetroWindow x:Class="InventoryManager.Views.MainView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vw="clr-namespace:InventoryManager.Views"
-             xmlns:cal="http://www.caliburnproject.org"
-             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             Title ="Main inventory window"
-             GlowBrush="{DynamicResource AccentColorBrush}"
-             ResizeMode="CanResizeWithGrip"
-             Height="500"
-             Width="600">
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:vw="clr-namespace:InventoryManager.Views"
+                      xmlns:cal="http://www.caliburnproject.org"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:lang="clr-namespace:InventoryManager.Properties"                  
+                      Title ="{x:Static lang:Resources.MainWindowTitle}"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      ResizeMode="CanResizeWithGrip"
+                      Height="500"
+                      Width="600">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <StackPanel Orientation="Horizontal">
@@ -19,13 +20,13 @@
     </controls:MetroWindow.RightWindowCommands>
     <Grid>
         <controls:MetroAnimatedSingleRowTabControl>
-            <controls:MetroTabItem Header="Inventory">
+            <controls:MetroTabItem Header="{x:Static lang:Resources.Inventory}">
                 <vw:InventoryView
                     cal:Bind.Model="{Binding NewInventoryModel}"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Top" />
             </controls:MetroTabItem>
-            <controls:MetroTabItem Header="Products">
+            <controls:MetroTabItem Header="{x:Static lang:Resources.Product}">
                 <vw:ProductListView
                     cal:Bind.Model="{Binding ProductListModel}"
                     HorizontalAlignment="Stretch"

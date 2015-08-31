@@ -120,11 +120,11 @@
   <data name="Product" xml:space="preserve">
     <value>Product</value>
   </data>
-  <data name="Selling price" xml:space="preserve">
+  <data name="SellingPrice" xml:space="preserve">
     <value>Selling price</value>
     <comment>Price at which a product is sold</comment>
   </data>
-  <data name="Buying cost" xml:space="preserve">
+  <data name="BuyingCost" xml:space="preserve">
     <value>Buying cost</value>
     <comment>Price at which a product is bought</comment>
   </data>
@@ -136,10 +136,36 @@
     <value>Quantity</value>
     <comment>Quantity of product</comment>
   </data>
-  <data name="Create new product" xml:space="preserve">
+  <data name="CreateNewProduct" xml:space="preserve">
     <value>Create new product</value>
   </data>
-  <data name="Edit product" xml:space="preserve">
+  <data name="EditProduct" xml:space="preserve">
     <value>Edit product</value>
+  </data>
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>Inventory Manager</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+    <comment>Confirm button</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Cancel button</comment>
+  </data>
+  <data name="DeleteProduct" xml:space="preserve">
+    <value>Delete product</value>
+    <comment>Delete the selected product</comment>
+  </data>
+  <data name="AddToInventory" xml:space="preserve">
+    <value>Add to inventory</value>
+    <comment>Add the selected product to inventory</comment>
+  </data>
+  <data name="EnterQuantity" xml:space="preserve">
+    <value>Enter quantity</value>
+    <comment>Watermark for adding product to inventory</comment>
+  </data>
+  <data name="SelectThisProduct" xml:space="preserve">
+    <value>Neutral</value>
   </data>
 </root>

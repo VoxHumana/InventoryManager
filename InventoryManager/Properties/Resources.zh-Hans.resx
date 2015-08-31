@@ -123,10 +123,10 @@
   <data name="Product" xml:space="preserve">
     <value>产品</value>
   </data>
-  <data name="Selling price" xml:space="preserve">
+  <data name="SellingPrice" xml:space="preserve">
     <value>售价</value>
   </data>
-  <data name="Buying cost" xml:space="preserve">
+  <data name="BuyingCost" xml:space="preserve">
     <value>成本</value>
   </data>
   <data name="Name" xml:space="preserve">
@@ -135,10 +135,31 @@
   <data name="Quantity" xml:space="preserve">
     <value>乘积量</value>
   </data>
-  <data name="Create new product" xml:space="preserve">
+  <data name="CreateNewProduct" xml:space="preserve">
     <value>创建产品</value>
   </data>
-  <data name="Edit product" xml:space="preserve">
+  <data name="EditProduct" xml:space="preserve">
     <value>编辑产品</value>
+  </data>
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>库存管理器</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="DeleteProduct" xml:space="preserve">
+    <value>删除产品</value>
+  </data>
+  <data name="AddToInventory" xml:space="preserve">
+    <value>加入库存</value>
+  </data>
+  <data name="EnterQuantity" xml:space="preserve">
+    <value>输入数量</value>
+  </data>
+  <data name="SelectThisProduct" xml:space="preserve">
+    <value>Chinese</value>
   </data>
 </root>

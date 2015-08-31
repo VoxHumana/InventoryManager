@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using WPFLocalizeExtension.Engine;
 
 namespace InventoryManager
 {
@@ -13,6 +14,8 @@ namespace InventoryManager
         public App()
         {
             InitializeComponent();
+            LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+            LocalizeDictionary.Instance.SetCultureCommand.Execute("zh-Hans");
         }
     }
 }

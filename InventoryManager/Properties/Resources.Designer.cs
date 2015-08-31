@@ -22,7 +22,7 @@ namespace InventoryManager.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace InventoryManager.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("InventoryManager.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace InventoryManager.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,45 +61,99 @@ namespace InventoryManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add to inventory.
+        /// </summary>
+        public static string AddToInventory {
+            get {
+                return ResourceManager.GetString("AddToInventory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Buying cost.
         /// </summary>
-        internal static string Buying_cost {
+        public static string BuyingCost {
             get {
-                return ResourceManager.GetString("Buying cost", resourceCulture);
+                return ResourceManager.GetString("BuyingCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        public static string Confirm {
+            get {
+                return ResourceManager.GetString("Confirm", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Create new product.
         /// </summary>
-        internal static string Create_new_product {
+        public static string CreateNewProduct {
             get {
-                return ResourceManager.GetString("Create new product", resourceCulture);
+                return ResourceManager.GetString("CreateNewProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete product.
+        /// </summary>
+        public static string DeleteProduct {
+            get {
+                return ResourceManager.GetString("DeleteProduct", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Edit product.
         /// </summary>
-        internal static string Edit_product {
+        public static string EditProduct {
             get {
-                return ResourceManager.GetString("Edit product", resourceCulture);
+                return ResourceManager.GetString("EditProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter quantity.
+        /// </summary>
+        public static string EnterQuantity {
+            get {
+                return ResourceManager.GetString("EnterQuantity", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Inventory.
         /// </summary>
-        internal static string Inventory {
+        public static string Inventory {
             get {
                 return ResourceManager.GetString("Inventory", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inventory Manager.
+        /// </summary>
+        public static string MainWindowTitle {
+            get {
+                return ResourceManager.GetString("MainWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
-        internal static string Name {
+        public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
             }
@@ -108,7 +162,7 @@ namespace InventoryManager.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Product.
         /// </summary>
-        internal static string Product {
+        public static string Product {
             get {
                 return ResourceManager.GetString("Product", resourceCulture);
             }
@@ -117,18 +171,27 @@ namespace InventoryManager.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Quantity.
         /// </summary>
-        internal static string Quantity {
+        public static string Quantity {
             get {
                 return ResourceManager.GetString("Quantity", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Neutral.
+        /// </summary>
+        public static string SelectThisProduct {
+            get {
+                return ResourceManager.GetString("SelectThisProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Selling price.
         /// </summary>
-        internal static string Selling_price {
+        public static string SellingPrice {
             get {
-                return ResourceManager.GetString("Selling price", resourceCulture);
+                return ResourceManager.GetString("SellingPrice", resourceCulture);
             }
         }
     }
