@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 using Caliburn.Micro;
 
@@ -18,13 +21,24 @@ namespace InventoryManager.ViewModels
             new XmlSerializer(typeof (ObservableCollection<ProductInventoryEntry>));
 
         private ObservableCollection<ProductInventoryEntry> _inventoryEntries;
+        private ProductInventoryEntry _selectedEntry;
 
         [ImportingConstructor]
         public InventoryViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
-            InventoryEntries = LoadInventory();
+            LoadInventoryFromXml();
+        }
+
+        public ProductInventoryEntry SelectedEntry
+        {
+            get { return _selectedEntry; }
+            set
+            {
+                _selectedEntry = value;
+                NotifyOfPropertyChange(() => SelectedEntry);
+            }
         }
 
         public ObservableCollection<ProductInventoryEntry> InventoryEntries
@@ -37,32 +51,36 @@ namespace InventoryManager.ViewModels
             }
         }
 
-        //public void LoadInventoryFromXml()
-        //{
-        //    Debug.WriteLine("Button was pressed");
-        //    FileStream file = File.OpenRead(_filePath);
-        //    Inventory = (List<ProductInventoryEntry>)_xmlSerializer.Deserialize(file);
-        //}
-        public void Handle(ProductInventoryEntry newEntry)
+        public void DeleteEntry()
         {
-            InventoryEntries.Add(newEntry);
+            if (SelectedEntry == null) return;
+            InventoryEntries.Remove(InventoryEntries.First(e => e.Name.Equals(SelectedEntry.Name)));
             NotifyOfPropertyChange(() => InventoryEntries);
         }
 
-        private ObservableCollection<ProductInventoryEntry> LoadInventory()
+        public void LoadInventoryFromXml()
         {
-            var entry1 = new ProductInventoryEntry(5, "Belt", 10, 3);
-            var entry2 = new ProductInventoryEntry(10, "Vase", 15, 5);
-            var entry3 = new ProductInventoryEntry(15, "Painting", 12, 5);
-
-            return new ObservableCollection<ProductInventoryEntry> {entry1, entry2, entry3};
+            try
+            {
+                FileStream file = File.OpenRead(_filePath);
+                InventoryEntries = (ObservableCollection<ProductInventoryEntry>) _xmlSerializer.Deserialize(file);
+            }
+            catch (FileNotFoundException fileNotFoundException)
+            {
+                Console.WriteLine("Inventory file could not be found: {0}", fileNotFoundException);
+            }          
         }
-
         public void SaveInventoryToXml()
         {
             var file = File.Create(_filePath);
             _xmlSerializer.Serialize(file, InventoryEntries);
             file.Close();
+        }
+
+        public void Handle(ProductInventoryEntry newEntry)
+        {
+            InventoryEntries.Add(newEntry);
+            NotifyOfPropertyChange(() => InventoryEntries);
         }
     }
 }

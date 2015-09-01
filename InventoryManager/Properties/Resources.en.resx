@@ -159,7 +159,10 @@
   <data name="EnterQuantity" xml:space="preserve">
     <value>Enter quantity</value>
   </data>
-  <data name="SelectThisProduct" xml:space="preserve">
-    <value>English</value>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
 </root>

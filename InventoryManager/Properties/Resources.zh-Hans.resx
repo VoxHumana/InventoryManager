@@ -159,7 +159,10 @@
   <data name="EnterQuantity" xml:space="preserve">
     <value>输入数量</value>
   </data>
-  <data name="SelectThisProduct" xml:space="preserve">
-    <value>Chinese</value>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
   </data>
 </root>

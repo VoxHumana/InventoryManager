@@ -165,7 +165,11 @@
     <value>Enter quantity</value>
     <comment>Watermark for adding product to inventory</comment>
   </data>
-  <data name="SelectThisProduct" xml:space="preserve">
-    <value>Neutral</value>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+    <comment>Save inventory to file</comment>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
 </root>

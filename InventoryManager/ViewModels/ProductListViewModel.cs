@@ -76,6 +76,8 @@ namespace InventoryManager.ViewModels
 
         public void SelectThisProduct()
         {
+            if (SelectedProduct == null) return;
+            Debug.WriteLine("QUANTITY IS: {0} TYPE: {1}", Quantity, Quantity.GetType());
             var inventoryEntry = new ProductInventoryEntry(SelectedProduct, Convert.ToInt32(Quantity));
             _eventAggregator.PublishOnUIThread(inventoryEntry);
         }

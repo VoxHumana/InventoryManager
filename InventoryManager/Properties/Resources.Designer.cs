@@ -106,6 +106,15 @@ namespace InventoryManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete product.
         /// </summary>
         public static string DeleteProduct {
@@ -178,11 +187,11 @@ namespace InventoryManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Neutral.
+        ///   Looks up a localized string similar to Save.
         /// </summary>
-        public static string SelectThisProduct {
+        public static string Save {
             get {
-                return ResourceManager.GetString("SelectThisProduct", resourceCulture);
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         

@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
+using WPFLocalizeExtension.Engine;
 
 namespace InventoryManager.ViewModels
 {
@@ -16,7 +17,8 @@ namespace InventoryManager.ViewModels
             NewInventoryModel = newInventoryModel;
             ProductListModel = productListModel;
             Languages = new ObservableCollection<string>() {"en", "zh-Hans", "de", "ru", "fr", "br"};
-            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("zh-Hans");
+            LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+            LocalizeDictionary.Instance.SetCultureCommand.Execute("zh-Hans");
         }
     }
 }

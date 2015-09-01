@@ -5,35 +5,25 @@ namespace InventoryManager
 {
     public class ProductInventoryEntry
     {
-        public ProductInventoryEntry()
-        {
-        }
-
-        public ProductInventoryEntry(double quantity, string name, double price, double cost)
-        {
-            Quantity = quantity;
-            Name = name;
-            Price = price;
-            Cost = cost;
-        }
+        public ProductInventoryEntry() { }
 
         public ProductInventoryEntry(Product product, int quantity)
         {
-            if (product == null) try
+            try
             {
-                throw new ArgumentNullException("product");
+                Name = product.Name;
+                Price = product.Price;
+                Cost = product.Cost;
+                Margin = product.Margin;
+                Quantity = quantity;
             }
-            catch (ArgumentNullException argumentNullException)
+            catch (ArgumentNullException)
             {
                 Debug.WriteLine("ERROR: Invalid arguments to construct ProductInventoryEntry");
             }
-            Name = product.Name;
-            Price = product.Price;
-            Cost = product.Cost;
-            Quantity = quantity;
         }
-
-        public double Quantity { get; set; }
+        public int Quantity { get; set; }
+        public int Margin { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
         public double Cost { get; set; }
