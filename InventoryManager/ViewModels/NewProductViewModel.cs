@@ -32,6 +32,7 @@ namespace InventoryManager.ViewModels
             {
                 _productName = value;
                 NotifyOfPropertyChange(() => ProductName);
+                NotifyOfPropertyChange(() => CanSaveProductToFile);
             }
         }
 
@@ -42,6 +43,7 @@ namespace InventoryManager.ViewModels
             {
                 _productPrice = value;
                 NotifyOfPropertyChange(() => ProductPrice);
+                NotifyOfPropertyChange(() => CanSaveProductToFile);
             }
         }
 
@@ -52,9 +54,17 @@ namespace InventoryManager.ViewModels
             {
                 _productCost = value;
                 NotifyOfPropertyChange(() => ProductCost);
+                NotifyOfPropertyChange(() => CanSaveProductToFile);
             }
         }
 
+        public bool CanSaveProductToFile
+        {
+            get
+            {
+                return !(ProductName == null || ProductCost == null || ProductPrice == null);
+            }
+        }
         public void SaveProductToFile()
         {
             _product = new Product

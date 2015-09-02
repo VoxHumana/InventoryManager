@@ -42,17 +42,21 @@
             </xctk:DoubleUpDown>      
             <Button x:Name="SelectThisProduct"
                     Content="{lex:Loc AddToInventory}"
+                    ToolTip="{lex:Loc AddToInventory}"
                     HorizontalAlignment="Center"/> 
             <Button x:Name="CreateNewProduct"
                     Content="{lex:Loc CreateNewProduct}"
+                    ToolTip="{lex:Loc CreateNewProduct}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"/>      
             <Button x:Name="EditProduct"
                     Content="{lex:Loc EditProduct}"
+                    ToolTip="{lex:Loc EditProduct}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"/>
             <Button x:Name="DeleteProduct"
                     Content="{lex:Loc DeleteProduct}"
+                    ToolTip="{lex:Loc DeleteProduct}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"/>                          
         </StackPanel>

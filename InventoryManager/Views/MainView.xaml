@@ -4,8 +4,11 @@
                       xmlns:vw="clr-namespace:InventoryManager.Views"
                       xmlns:cal="http://www.caliburnproject.org"
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                      xmlns:lang="clr-namespace:InventoryManager.Properties"                  
-                      Title ="{x:Static lang:Resources.MainWindowTitle}"
+                      xmlns:lex="http://wpflocalizeextension.codeplex.com"
+                      lex:LocalizeDictionary.DesignCulture="en"
+                      lex:ResxLocalizationProvider.DefaultAssembly="InventoryManager"
+                      lex:ResxLocalizationProvider.DefaultDictionary="Resources"                  
+                      Title ="{lex:Loc MainWindowTitle}"
                       GlowBrush="{DynamicResource AccentColorBrush}"
                       ResizeMode="CanResizeWithGrip"
                       Height="500"
@@ -14,19 +17,20 @@
         <controls:WindowCommands>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Language:"/>
-                <controls:SplitButton ItemsSource="{Binding Languages}" />
+                <controls:SplitButton ItemsSource="{Binding Languages}"
+                                      SelectedItem="{Binding SelectedLanguage}"/>
             </StackPanel>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
     <Grid>
         <controls:MetroAnimatedSingleRowTabControl>
-            <controls:MetroTabItem Header="{x:Static lang:Resources.Inventory}">
+            <controls:MetroTabItem Header="{lex:Loc Inventory}">
                 <vw:InventoryView
                     cal:Bind.Model="{Binding NewInventoryModel}"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Top" />
             </controls:MetroTabItem>
-            <controls:MetroTabItem Header="{x:Static lang:Resources.Product}">
+            <controls:MetroTabItem Header="{lex:Loc Product}">
                 <vw:ProductListView
                     cal:Bind.Model="{Binding ProductListModel}"
                     HorizontalAlignment="Stretch"

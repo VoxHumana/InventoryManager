@@ -5,7 +5,7 @@ namespace InventoryManager.Views
     /// <summary>
     /// Interaction logic for NewProductView.xaml
     /// </summary>
-    public partial class NewProductView : UserControl
+    public partial class NewProductView
     {
         public NewProductView()
         {

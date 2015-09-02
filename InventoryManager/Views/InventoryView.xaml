@@ -25,10 +25,12 @@
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <Button x:Name="SaveInventoryToXml"
                     Content="{lex:Loc Save}"
+                    ToolTip="{lex:Loc Save}"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"/>
             <Button x:Name="DeleteEntry"
                     Content="{lex:Loc Delete}"
+                    ToolTip="{lex:Loc Delete}"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"/>
         </StackPanel>
