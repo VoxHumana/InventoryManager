@@ -21,7 +21,7 @@ namespace InventoryManager.ViewModels
         private ObservableCollection<Product> _productList;
 
         private string _quantity;
-        private readonly string _saveProductMessage = "saveProductMessage";
+        private const string SaveProductMessage = "saveProductMessage";
         private Product _selectedProduct;
 
         [ImportingConstructor]
@@ -54,6 +54,8 @@ namespace InventoryManager.ViewModels
             set
             {
                 _selectedProduct = value;
+                NotifyOfPropertyChange(() => CanDeleteProduct);
+                NotifyOfPropertyChange(() => CanEditProduct);
                 NotifyOfPropertyChange(() => SelectedProduct);
             }
         }
@@ -70,14 +72,13 @@ namespace InventoryManager.ViewModels
 
         public void Handle(Dictionary<string, Product> message)
         {
-            if (!message.ContainsKey(_saveProductMessage)) return;
+            if (!message.ContainsKey(SaveProductMessage)) return;
             LoadProductsFromFile();
         }
 
         public void SelectThisProduct()
         {
             if (SelectedProduct == null) return;
-            Debug.WriteLine("QUANTITY IS: {0} TYPE: {1}", Quantity, Quantity.GetType());
             var inventoryEntry = new ProductInventoryEntry(SelectedProduct, Convert.ToInt32(Quantity));
             _eventAggregator.PublishOnUIThread(inventoryEntry);
         }
@@ -102,11 +103,25 @@ namespace InventoryManager.ViewModels
             ProductList = productList;
         }
 
+        public bool CanEditProduct
+        {
+            get
+            {
+                return (_selectedProduct != null);
+            }
+        }
         public void EditProduct()
         {
             if (SelectedProduct == null) return;
             _eventAggregator.PublishOnUIThread(new Dictionary<string, Product> {{"editProductMessage", SelectedProduct}});
             _windowManager.ShowDialog(EditProductModel);
+        }
+        public bool CanDeleteProduct
+        {
+            get
+            {
+                return (_selectedProduct != null);
+            }
         }
 
         public void DeleteProduct()

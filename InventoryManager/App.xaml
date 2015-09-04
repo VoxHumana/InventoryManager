@@ -19,15 +19,13 @@
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="{x:Type Button}"
-                   BasedOn="{StaticResource SquareButtonStyle}">
+                   BasedOn="{StaticResource MetroCircleButtonStyle}">
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="Margin" Value="8"/>
                 <Setter Property="Padding" Value="8,4"/>
-                <Setter Property="Content">
-                    <Setter.Value>
-                        <TextBlock Text="{Binding}"/>
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="Width" Value="50"/>
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

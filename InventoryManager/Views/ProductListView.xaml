@@ -1,6 +1,6 @@
 ﻿<UserControl x:Class="InventoryManager.Views.ProductListView"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
-             lex:LocalizeDictionary.DesignCulture="zh-Hans"
+             lex:LocalizeDictionary.DesignCulture="en"
              lex:ResxLocalizationProvider.DefaultAssembly="InventoryManager"
              lex:ResxLocalizationProvider.DefaultDictionary="Resources"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -10,14 +10,12 @@
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch">
     <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="80*"/>
-                <RowDefinition Height="15*"/>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="10*"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DataGrid ItemsSource="{Binding ProductList}" 
-                  SelectedItem="{Binding SelectedProduct}"
+                  SelectedItem="{Binding Path=SelectedProduct, Mode=TwoWay}"
                   IsReadOnly="True"
                   Grid.Column="0" 
                   HorizontalAlignment="Stretch" 
@@ -41,24 +39,52 @@
                 </xctk:DoubleUpDown.Watermark>
             </xctk:DoubleUpDown>      
             <Button x:Name="SelectThisProduct"
-                    Content="{lex:Loc AddToInventory}"
                     ToolTip="{lex:Loc AddToInventory}"
-                    HorizontalAlignment="Center"/> 
+                    HorizontalAlignment="Center">
+                <Rectangle Fill="DarkBlue"
+                           Height="20"
+                           Width="20">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_home_garage_arrow_open}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button> 
             <Button x:Name="CreateNewProduct"
-                    Content="{lex:Loc CreateNewProduct}"
                     ToolTip="{lex:Loc CreateNewProduct}"
                     HorizontalAlignment="Right"
-                    VerticalAlignment="Center"/>      
+                    VerticalAlignment="Center">
+                <Rectangle Fill="DodgerBlue"
+                           Height="20"
+                           Width="20">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_page_solid_add}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>      
             <Button x:Name="EditProduct"
-                    Content="{lex:Loc EditProduct}"
                     ToolTip="{lex:Loc EditProduct}"
                     HorizontalAlignment="Right"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center">
+                <Rectangle Fill="SpringGreen"
+                           Height="20"
+                           Width="20">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_page_edit}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
             <Button x:Name="DeleteProduct"
-                    Content="{lex:Loc DeleteProduct}"
                     ToolTip="{lex:Loc DeleteProduct}"
                     HorizontalAlignment="Right"
-                    VerticalAlignment="Center"/>                          
+                    VerticalAlignment="Center">
+                <Rectangle Fill="Red"
+                           Height="20"
+                           Width="20">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_delete}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>                          
         </StackPanel>
     </Grid>
 </UserControl>

@@ -29,6 +29,14 @@
         }
         private double _price;
 
+        public int Profit
+        {
+            get
+            {
+                return (int) (_price - _cost);
+            }
+        }
+
         public int Margin
         {
             get

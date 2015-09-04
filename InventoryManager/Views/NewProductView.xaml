@@ -7,40 +7,49 @@
                       lex:ResxLocalizationProvider.DefaultAssembly="InventoryManager"
                       lex:ResxLocalizationProvider.DefaultDictionary="Resources"
                       GlowBrush="{DynamicResource AccentColorBrush}"
+                      NonActiveGlowBrush="Red"
+                      WindowStartupLocation="CenterScreen"
                       ResizeMode="CanResizeWithGrip"
                       MinWidth="300"
-                      MinHeight="300"
+                      MinHeight="325"
                       Width="300"
-                      Height="300">
+                      Height="325"
+                      Title="{lex:Loc CreateNewProduct}">
     <Grid Margin="25">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBox x:Name="ProductName" 
-                 controls:TextBoxHelper.Watermark="Enter product name" 
+        <TextBox Text="{Binding ProductName, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                 controls:TextBoxHelper.Watermark="{lex:Loc EnterProductName}"
+                 controls:TextBoxHelper.UseFloatingWatermark="True"
+                 controls:TextBoxHelper.IsWaitingForData="True"
+                 controls:TextBoxHelper.ClearTextButton="True"
                  Grid.Row="0" 
                  Margin="10"/>
-        <TextBox x:Name="ProductPrice" 
-                 controls:TextBoxHelper.Watermark="Enter product selling price" 
+        <TextBox Text="{Binding ProductPrice, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                 controls:TextBoxHelper.Watermark="{lex:Loc EnterProductPrice}" 
+                 controls:TextBoxHelper.UseFloatingWatermark="True"
+                 controls:TextBoxHelper.IsWaitingForData="True"
+                 controls:TextBoxHelper.ClearTextButton="True"
                  Grid.Row="1" 
                  Margin="10" />
-        <TextBox x:Name="ProductCost" 
-                 controls:TextBoxHelper.Watermark="Enter product cost" 
+        <TextBox Text="{Binding ProductCost, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                 controls:TextBoxHelper.Watermark="{lex:Loc EnterProductCost}" 
+                 controls:TextBoxHelper.UseFloatingWatermark="True"
+                 controls:TextBoxHelper.IsWaitingForData="True"
+                 controls:TextBoxHelper.ClearTextButton="True"
                  Grid.Row="2" 
                  Margin="10" />
-        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" 
+                    Grid.Row="3" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom">
             <Button x:Name="SaveProductToFile"
                     ToolTip="{lex:Loc Confirm}"
-                    ToolTipService.ShowOnDisabled="True"
-                    IsCancel="True"
-                    Height="50"
-                    Width="50"
-                    Margin="10"
-                    Padding="8,4"
-                    Style="{DynamicResource MetroCircleButtonStyle}">
+                    IsCancel="True">
                 <Rectangle Fill="ForestGreen"
                            Height="20"
                            Width="20">
@@ -50,13 +59,7 @@
                 </Rectangle>
             </Button>
             <Button ToolTip="{lex:Loc Cancel}" 
-                    ToolTipService.ShowOnDisabled="True"
-                    IsCancel="True"
-                    Style="{DynamicResource MetroCircleButtonStyle}"
-                    Height="50"
-                    Width="50"
-                    Margin="10"
-                    Padding="8,4">
+                    IsCancel="True">
                 <Rectangle Fill="DarkRed"
                            Height="20"
                            Width="20">

@@ -14,7 +14,6 @@ namespace InventoryManager
                 Name = product.Name;
                 Price = product.Price;
                 Cost = product.Cost;
-                Margin = product.Margin;
                 Quantity = quantity;
             }
             catch (ArgumentNullException)
@@ -23,9 +22,23 @@ namespace InventoryManager
             }
         }
         public int Quantity { get; set; }
-        public int Margin { get; set; }
+
+        public int Margin
+        {
+            get
+            {
+                return (int) ((Price - Cost)/Price);
+            }
+        }
+
         public string Name { get; set; }
         public double Price { get; set; }
         public double Cost { get; set; }
+        public double Profit {
+            get
+            {
+                return Price - Cost;
+            } 
+        }
     }
 }

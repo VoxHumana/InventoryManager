@@ -172,4 +172,24 @@
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="EnterProductName" xml:space="preserve">
+    <value>Enter product name</value>
+    <comment>Watermark for enter product name</comment>
+  </data>
+  <data name="EnterProductPrice" xml:space="preserve">
+    <value>Enter product price</value>
+    <comment>Watermark for enter product price</comment>
+  </data>
+  <data name="EnterProductCost" xml:space="preserve">
+    <value>Enter product cost</value>
+    <comment>Watermark for enter product cost</comment>
+  </data>
+  <data name="InvalidInput" xml:space="preserve">
+    <value>Invalid input</value>
+    <comment>Error for invalid inputs</comment>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+    <comment>The selected language of the application</comment>
+  </data>
 </root>

@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DataGrid ItemsSource="{Binding InventoryEntries}"
                   SelectedItem="{Binding SelectedEntry}"
@@ -22,17 +22,33 @@
                   Grid.Column="0" 
                   Margin="8">
         </DataGrid>
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Grid.Row="1">
             <Button x:Name="SaveInventoryToXml"
-                    Content="{lex:Loc Save}"
                     ToolTip="{lex:Loc Save}"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Top"/>
+                    VerticalAlignment="Top">
+                <Rectangle Fill="DeepSkyBlue"
+                           Height="20"
+                           Width="20">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_save}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
             <Button x:Name="DeleteEntry"
-                    Content="{lex:Loc Delete}"
                     ToolTip="{lex:Loc Delete}"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"/>
+                    HorizontalAlignment="Center">
+                <Rectangle Fill="DimGray"
+                           Height="20"
+                           Width="20">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_delete}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
         </StackPanel>
     </Grid>
 </UserControl>

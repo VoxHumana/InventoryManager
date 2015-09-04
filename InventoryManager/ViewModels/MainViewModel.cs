@@ -33,7 +33,7 @@ namespace InventoryManager.ViewModels
             NewInventoryModel = newInventoryModel;
             NewProductModel = newProductModel;
             ProductListModel = productListModel;
-            Languages = new ObservableCollection<string>() {"en", "zh-Hans"};           
+            Languages = new ObservableCollection<string>() {"en", "zh-Hans", "fr-FR"};           
             LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
             LocalizeDictionary.Instance.SetCultureCommand.Execute("en");
             SelectedLanguage = "en";

@@ -133,6 +133,33 @@ namespace InventoryManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter product cost.
+        /// </summary>
+        public static string EnterProductCost {
+            get {
+                return ResourceManager.GetString("EnterProductCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter product name.
+        /// </summary>
+        public static string EnterProductName {
+            get {
+                return ResourceManager.GetString("EnterProductName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter product price.
+        /// </summary>
+        public static string EnterProductPrice {
+            get {
+                return ResourceManager.GetString("EnterProductPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter quantity.
         /// </summary>
         public static string EnterQuantity {
@@ -142,11 +169,29 @@ namespace InventoryManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid input.
+        /// </summary>
+        public static string InvalidInput {
+            get {
+                return ResourceManager.GetString("InvalidInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inventory.
         /// </summary>
         public static string Inventory {
             get {
                 return ResourceManager.GetString("Inventory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
             }
         }
         

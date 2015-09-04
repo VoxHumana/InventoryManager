@@ -165,4 +165,19 @@
   <data name="Delete" xml:space="preserve">
     <value>删除</value>
   </data>
+  <data name="EnterProductName" xml:space="preserve">
+    <value>输入产品名称</value>
+  </data>
+  <data name="EnterProductCost" xml:space="preserve">
+    <value>输入产品成本</value>
+  </data>
+  <data name="EnterProductPrice" xml:space="preserve">
+    <value>输入产品价格</value>
+  </data>
+  <data name="InvalidInput" xml:space="preserve">
+    <value>输入不正确</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
 </root>

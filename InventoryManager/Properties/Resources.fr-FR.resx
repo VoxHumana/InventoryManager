@@ -117,67 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddToInventory" xml:space="preserve">
+    <value>Ajouter à l'inventaire</value>
+  </data>
   <data name="BuyingCost" xml:space="preserve">
-    <value>Buying cost</value>
-  </data>
-  <data name="Inventory" xml:space="preserve">
-    <value>Inventory</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="Product" xml:space="preserve">
-    <value>Product</value>
-  </data>
-  <data name="Quantity" xml:space="preserve">
-    <value>Quantity</value>
-  </data>
-  <data name="SellingPrice" xml:space="preserve">
-    <value>Selling price</value>
-  </data>
-  <data name="CreateNewProduct" xml:space="preserve">
-    <value>Create new product</value>
-  </data>
-  <data name="EditProduct" xml:space="preserve">
-    <value>Edit product</value>
-  </data>
-  <data name="MainWindowTitle" xml:space="preserve">
-    <value>Inventory Manager</value>
-  </data>
-  <data name="Confirm" xml:space="preserve">
-    <value>Confirm</value>
+    <value>Coûts d'achat</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Annuler</value>
   </data>
-  <data name="DeleteProduct" xml:space="preserve">
-    <value>Delete product</value>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirmer</value>
   </data>
-  <data name="AddToInventory" xml:space="preserve">
-    <value>Add to inventory</value>
-  </data>
-  <data name="EnterQuantity" xml:space="preserve">
-    <value>Enter quantity</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
+  <data name="CreateNewProduct" xml:space="preserve">
+    <value>Créer un nouveau produit</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Effacer</value>
   </data>
-  <data name="EnterProductName" xml:space="preserve">
-    <value>Enter product name</value>
+  <data name="DeleteProduct" xml:space="preserve">
+    <value>Supprimer produit</value>
   </data>
-  <data name="EnterProductPrice" xml:space="preserve">
-    <value>Enter product price</value>
+  <data name="EditProduct" xml:space="preserve">
+    <value>Produits d'édition</value>
   </data>
   <data name="EnterProductCost" xml:space="preserve">
-    <value>Enter product cost</value>
+    <value>Entrez le coût du produit</value>
+  </data>
+  <data name="EnterProductName" xml:space="preserve">
+    <value>Entrez le nom du produit</value>
+  </data>
+  <data name="EnterProductPrice" xml:space="preserve">
+    <value>Entrez le prix du produit</value>
+  </data>
+  <data name="EnterQuantity" xml:space="preserve">
+    <value>Entrez la quantité</value>
+  </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>Inventaire</value>
+  </data>
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>Gestionnaire d'inventaire</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Product" xml:space="preserve">
+    <value>Produit</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantité</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="SellingPrice" xml:space="preserve">
+    <value>Prix de vente</value>
   </data>
   <data name="InvalidInput" xml:space="preserve">
-    <value>Invalid input</value>
+    <value>Entrée invalide</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Language</value>
+    <value>Langue</value>
   </data>
 </root>

@@ -9,16 +9,22 @@
                       lex:ResxLocalizationProvider.DefaultAssembly="InventoryManager"
                       lex:ResxLocalizationProvider.DefaultDictionary="Resources"                  
                       Title ="{lex:Loc MainWindowTitle}"
+                      ShowTitleBar="True"
                       GlowBrush="{DynamicResource AccentColorBrush}"
                       ResizeMode="CanResizeWithGrip"
-                      Height="500"
+                      WindowStartupLocation="CenterScreen"
+                      Height="350"
                       Width="600">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <StackPanel Orientation="Horizontal">
-                <Label Content="Language:"/>
+                <TextBlock Text="{lex:Loc Language}"
+                           VerticalAlignment="Center"
+                           Margin="4,0"/>
                 <controls:SplitButton ItemsSource="{Binding Languages}"
-                                      SelectedItem="{Binding SelectedLanguage}"/>
+                                      SelectedItem="{Binding SelectedLanguage}"
+                                      BorderBrush="LightSkyBlue"
+                                      Margin="4"/>
             </StackPanel>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
@@ -28,13 +34,13 @@
                 <vw:InventoryView
                     cal:Bind.Model="{Binding NewInventoryModel}"
                     HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top" />
+                    VerticalAlignment="Stretch" />
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="{lex:Loc Product}">
                 <vw:ProductListView
                     cal:Bind.Model="{Binding ProductListModel}"
                     HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"/>
+                    VerticalAlignment="Stretch"/>
             </controls:MetroTabItem>
         </controls:MetroAnimatedSingleRowTabControl>
     </Grid>
