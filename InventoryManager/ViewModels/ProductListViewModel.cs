@@ -56,6 +56,7 @@ namespace InventoryManager.ViewModels
                 _selectedProduct = value;
                 NotifyOfPropertyChange(() => CanDeleteProduct);
                 NotifyOfPropertyChange(() => CanEditProduct);
+                NotifyOfPropertyChange(() => CanSelectThisProduct);
                 NotifyOfPropertyChange(() => SelectedProduct);
             }
         }
@@ -76,6 +77,14 @@ namespace InventoryManager.ViewModels
             LoadProductsFromFile();
         }
 
+        public bool CanSelectThisProduct
+        {
+            get
+            {
+                return SelectedProduct != null;
+            }
+        }
+
         public void SelectThisProduct()
         {
             if (SelectedProduct == null) return;
@@ -91,6 +100,8 @@ namespace InventoryManager.ViewModels
         private void LoadProductsFromFile()
         {
             var d = new DirectoryInfo(_path);
+            if(!d.Exists)
+                d.Create();
             var productList = new ObservableCollection<Product>();
             foreach (var productFile in d.GetFiles("*.xml"))
             {
@@ -130,7 +141,7 @@ namespace InventoryManager.ViewModels
             {
                 var d = new DirectoryInfo(_path);
             }
-            catch (SecurityException securityException)
+            catch (SecurityException)
             {
                 Debug.WriteLine("ERROR: Security exception was caught");
             }
@@ -138,7 +149,7 @@ namespace InventoryManager.ViewModels
             {
                 File.Delete(_path + string.Format("{0}.xml", RemoveWhitespace(SelectedProduct.Name)));
             }
-            catch (DirectoryNotFoundException directoryNotFoundException)
+            catch (DirectoryNotFoundException)
             {
                 Debug.WriteLine("ERROR: Could not find directory");
             }

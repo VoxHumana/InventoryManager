@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using Caliburn.Micro;
 using InventoryManager.Properties;
@@ -15,19 +15,19 @@ namespace InventoryManager.ViewModels
     public class NewProductViewModel : PropertyChangedBase, IDataErrorInfo
     {
         private Product _product;
-        private string _productName;
-        private string _productPrice;
-        private string _productCost;
+        private string _productName, _productPrice, _productCost;
         private bool _initialProductName, _initialProductPrice, _initialProductCost;
+        private readonly Regex _priceRegex;
         private readonly IEventAggregator _eventAggregator;
         private readonly XmlSerializer _xmlSerializer = new XmlSerializer(typeof(Product));
-        readonly DirectoryInfo _products = new DirectoryInfo(Environment.CurrentDirectory + "\\products");
+        private readonly DirectoryInfo _products = new DirectoryInfo(Environment.CurrentDirectory + "\\products");
 
         [ImportingConstructor]
         public NewProductViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _initialProductPrice = _initialProductName = _initialProductCost = true;
+            _priceRegex = new Regex(@"^\b\d*[.]?\d{1,2}\b$");
         }
         public string ProductName
         {
@@ -69,9 +69,14 @@ namespace InventoryManager.ViewModels
         {
             get
             {
-                return !string.IsNullOrEmpty(_productName) && !string.IsNullOrEmpty(_productCost) && !string.IsNullOrEmpty(_productPrice);
+                return !string.IsNullOrEmpty(_productName) &&
+                       !string.IsNullOrEmpty(_productCost) &&
+                       !string.IsNullOrEmpty(_productPrice) &&
+                       _priceRegex.IsMatch(ProductCost) &&
+                       _priceRegex.IsMatch(ProductPrice);
             }
         }
+
         public void SaveProductToFile()
         {
             _product = new Product
@@ -121,7 +126,7 @@ namespace InventoryManager.ViewModels
                     }
                     else 
                     {
-                        if (ProductCost.All(c => !(char.IsDigit(c) || c.Equals('.'))))
+                        if (!_priceRegex.IsMatch(ProductCost))
                             result = Resources.InvalidInput;
                     }
                 }
@@ -133,7 +138,7 @@ namespace InventoryManager.ViewModels
                     }
                     else
                     {
-                        if (ProductPrice.All(c => !(char.IsDigit(c) || c.Equals('.'))))
+                        if (!_priceRegex.IsMatch(ProductPrice))
                             result = Resources.InvalidInput;
                     }
                     
@@ -142,6 +147,6 @@ namespace InventoryManager.ViewModels
             }
         }
 
-        public string Error { get { return string.Empty; } }
+        public string Error => string.Empty;
     }
 }

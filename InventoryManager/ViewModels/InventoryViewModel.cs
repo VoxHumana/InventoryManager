@@ -28,6 +28,7 @@ namespace InventoryManager.ViewModels
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
+            InventoryEntries = new ObservableCollection<ProductInventoryEntry>();
             LoadInventoryFromXml();
         }
 
@@ -65,9 +66,10 @@ namespace InventoryManager.ViewModels
                 FileStream file = File.OpenRead(_filePath);
                 InventoryEntries = (ObservableCollection<ProductInventoryEntry>) _xmlSerializer.Deserialize(file);
             }
-            catch (FileNotFoundException fileNotFoundException)
+            catch (FileNotFoundException)
             {
-                Console.WriteLine("Inventory file could not be found: {0}", fileNotFoundException);
+                Console.WriteLine("Inventory file could not be found, creating one");
+                File.Create(_filePath);
             }          
         }
         public void SaveInventoryToXml()
@@ -79,6 +81,11 @@ namespace InventoryManager.ViewModels
 
         public void Handle(ProductInventoryEntry newEntry)
         {
+            if (newEntry == null)
+            {
+                Debug.WriteLine("Null object passed to inventory");
+                return;
+            }
             InventoryEntries.Add(newEntry);
             NotifyOfPropertyChange(() => InventoryEntries);
         }
