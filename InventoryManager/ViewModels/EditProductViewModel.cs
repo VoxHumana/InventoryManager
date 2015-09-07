@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using Caliburn.Micro;
 using InventoryManager.Properties;
@@ -19,19 +19,16 @@ namespace InventoryManager.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly DirectoryInfo _products = new DirectoryInfo(Environment.CurrentDirectory + "\\products");
         private readonly XmlSerializer _xmlSerializer = new XmlSerializer(typeof (Product));
+        private readonly Regex _priceRegex;
         private string _oldProductName;
-
-        private string _productCost;
-
-        private string _productName;
-
-        private string _productPrice;
+        private string _productCost, _productName, _productPrice;
 
         [ImportingConstructor]
         public EditProductViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
+            _priceRegex = new Regex(@"^\b\d*[.]?\d{1,2}\b$");
         }
 
         public string ProductName
@@ -75,13 +72,12 @@ namespace InventoryManager.ViewModels
             ProductCost = message[EditProductMessage].Cost.ToString(CultureInfo.InvariantCulture);
             ProductPrice = message[EditProductMessage].Price.ToString(CultureInfo.InvariantCulture);
         }
-        public bool CanSaveEditedProduct
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(_productName) && !string.IsNullOrEmpty(_productCost) && !string.IsNullOrEmpty(_productPrice);
-            }
-        } 
+        public bool CanSaveEditedProduct => !string.IsNullOrEmpty(_productName) &&
+                                            !string.IsNullOrEmpty(_productCost) &&
+                                            !string.IsNullOrEmpty(_productPrice) &&
+                                            _priceRegex.IsMatch(ProductCost) &&
+                                            _priceRegex.IsMatch(ProductPrice);
+
         public void SaveEditedProduct()
         {
             var product = new Product
@@ -121,28 +117,45 @@ namespace InventoryManager.ViewModels
                 if(columnName.Equals("ProductName"))
                 {
                     if (string.IsNullOrEmpty(ProductName))
+                    {
                         result = Resources.EnterProductName;
-                    if (!(ProductName is string))
-                        result = Resources.InvalidInput;
+                    }
+                    else
+                    {
+                        if (!(ProductName is string))
+                            result = Resources.InvalidInput;
+                    }
+
                 }
                 if (columnName.Equals("ProductCost"))
                 {
                     if (string.IsNullOrEmpty(ProductCost))
+                    {
                         result = Resources.EnterProductCost;
-                    if (ProductCost.All(c => !(char.IsDigit(c) || c.Equals('.'))))
-                        result = Resources.InvalidInput;
+                    }
+                    else
+                    {
+                        if (!_priceRegex.IsMatch(ProductCost))
+                            result = Resources.InvalidInput;
+                    }
                 }
                 if (columnName.Equals("ProductPrice"))
                 {
                     if (string.IsNullOrEmpty(ProductPrice))
+                    {
                         result = Resources.EnterProductPrice;
-                    if (ProductPrice.All(c => !(char.IsDigit(c) || c.Equals('.'))))
-                        result = Resources.InvalidInput;
+
+                    }
+                    else
+                    {
+                        if (!_priceRegex.IsMatch(ProductPrice))
+                            result = Resources.InvalidInput;
+                    }
                 }
                 return result;
             }
         }
 
-        public string Error { get { return string.Empty; } }
+        public string Error => string.Empty;
     }
 }

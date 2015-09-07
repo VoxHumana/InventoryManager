@@ -65,7 +65,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NewProductVIewModelTest.cs" />
+    <Compile Include="Unit Tests\EditProductViewModelUnitTest.cs" />
+    <Compile Include="Unit Tests\InventoryViewModelUnitTests.cs" />
+    <Compile Include="Unit Tests\NewProductVIewModelUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

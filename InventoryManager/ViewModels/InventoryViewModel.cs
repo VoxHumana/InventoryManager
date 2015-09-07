@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
@@ -15,7 +13,7 @@ namespace InventoryManager.ViewModels
     {
         private const string InventoryName = "Inventory";
         private readonly IEventAggregator _eventAggregator;
-        private readonly string _filePath = Environment.CurrentDirectory + "//" + InventoryName + ".xml";
+        private readonly string _filePath = Environment.CurrentDirectory + "\\" + InventoryName + ".xml";
 
         private readonly XmlSerializer _xmlSerializer =
             new XmlSerializer(typeof (ObservableCollection<ProductInventoryEntry>));
@@ -39,6 +37,7 @@ namespace InventoryManager.ViewModels
             {
                 _selectedEntry = value;
                 NotifyOfPropertyChange(() => SelectedEntry);
+                NotifyOfPropertyChange(() => CanDeleteEntry);
             }
         }
 
@@ -49,8 +48,11 @@ namespace InventoryManager.ViewModels
             {
                 _inventoryEntries = value;
                 NotifyOfPropertyChange(() => InventoryEntries);
+                NotifyOfPropertyChange(() => CanSaveInventoryToXml);
             }
         }
+
+        public bool CanDeleteEntry => SelectedEntry != null;
 
         public void DeleteEntry()
         {
@@ -59,19 +61,16 @@ namespace InventoryManager.ViewModels
             NotifyOfPropertyChange(() => InventoryEntries);
         }
 
-        public void LoadInventoryFromXml()
+        private void LoadInventoryFromXml()
         {
-            try
-            {
-                FileStream file = File.OpenRead(_filePath);
-                InventoryEntries = (ObservableCollection<ProductInventoryEntry>) _xmlSerializer.Deserialize(file);
-            }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine("Inventory file could not be found, creating one");
-                File.Create(_filePath);
-            }          
+            if (!File.Exists(_filePath)) return;
+            FileStream file = File.OpenRead(_filePath);
+            InventoryEntries = (ObservableCollection<ProductInventoryEntry>) _xmlSerializer.Deserialize(file);
+            file.Close();
         }
+
+        public bool CanSaveInventoryToXml => InventoryEntries != null &&
+                                             (InventoryEntries.Count > 0);
         public void SaveInventoryToXml()
         {
             var file = File.Create(_filePath);
@@ -81,13 +80,11 @@ namespace InventoryManager.ViewModels
 
         public void Handle(ProductInventoryEntry newEntry)
         {
-            if (newEntry == null)
-            {
-                Debug.WriteLine("Null object passed to inventory");
-                return;
-            }
+            if (newEntry == null) return;
             InventoryEntries.Add(newEntry);
+            SaveInventoryToXml();
             NotifyOfPropertyChange(() => InventoryEntries);
+            NotifyOfPropertyChange(() => CanSaveInventoryToXml);
         }
     }
 }

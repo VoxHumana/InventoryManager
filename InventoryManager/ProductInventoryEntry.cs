@@ -27,7 +27,7 @@ namespace InventoryManager
         {
             get
             {
-                return (int) ((Price - Cost)/Price);
+                return (int) (((Price - Cost)/Price)*100);
             }
         }
 

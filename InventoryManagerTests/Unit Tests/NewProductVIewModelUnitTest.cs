@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.Globalization;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using FluentAssertions;
 using InventoryManager.ViewModels;
 using Moq;
@@ -9,7 +7,7 @@ using NUnit.Framework;
 namespace InventoryManagerTests
 {
     [TestFixture]
-    public class NewProductViewModelTest
+    public class NewProductViewModelUnitTest
     {
 
         private readonly Mock<IEventAggregator> _eventAggregatorMock = new Mock<IEventAggregator>();
@@ -38,10 +36,17 @@ namespace InventoryManagerTests
 
             //Assert
             _newProductViewModel.CanSaveProductToFile.Should().BeTrue("because all necessary properties are valid");
+            _newProductViewModel["ProductName"].Should()
+                .BeNullOrEmpty("because no validation error should show for a valid product name");
+            _newProductViewModel["ProductPrice"].Should()
+                .BeNullOrEmpty("because no validation error should show for a valid product price");
+            _newProductViewModel["ProductCost"].Should()
+                .BeNullOrEmpty("because no validation error should show for a valid product cost");
         }
 
-        [Test]
-        public void CanSaveProduct_ShouldReturnFalse_WhenProductNameIsEmpty()
+        [TestCase(null)]
+        [TestCase("")]
+        public void CanSaveProduct_ShouldReturnFalse_WhenProductNameIsNullOrEmpty(string productName)
         {
 
             //Arrange
@@ -49,7 +54,7 @@ namespace InventoryManagerTests
             const string cost = "42";
 
             //Act
-            _newProductViewModel.ProductName = string.Empty;
+            _newProductViewModel.ProductName = productName;
             _newProductViewModel.ProductPrice = price;
             _newProductViewModel.ProductCost = cost;
 
@@ -57,25 +62,6 @@ namespace InventoryManagerTests
             _newProductViewModel.ProductName.Should().BeNullOrEmpty("because no value was assigned to product name");
             _newProductViewModel.CanSaveProductToFile.Should().BeFalse("because the product has no name");
             _newProductViewModel["ProductName"].Should().Be("Enter product name", "because no value was assigned to product name");
-        }
-
-        [Test]
-        public void CanSaveProduct_ShouldReturnFalse_WhenProductNameIsNull()
-        {
-
-            //Arrange
-            const string price = "42";
-            const string cost = "42";
-
-            //Act
-            _newProductViewModel.ProductName = null;
-            _newProductViewModel.ProductPrice = price;
-            _newProductViewModel.ProductCost = cost;
-
-            //Assert
-            _newProductViewModel.ProductName.Should().BeNullOrEmpty("because no value was assigned to product name");
-            _newProductViewModel.CanSaveProductToFile.Should().BeFalse("because the product has no name");
-            _newProductViewModel["ProductName"].Should().Be("Invalid input", "because no value was assigned to product name");
         }
 
         [TestCase(null)]

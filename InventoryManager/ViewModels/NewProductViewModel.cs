@@ -65,17 +65,11 @@ namespace InventoryManager.ViewModels
             }
         }
 
-        public bool CanSaveProductToFile
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(_productName) &&
-                       !string.IsNullOrEmpty(_productCost) &&
-                       !string.IsNullOrEmpty(_productPrice) &&
-                       _priceRegex.IsMatch(ProductCost) &&
-                       _priceRegex.IsMatch(ProductPrice);
-            }
-        }
+        public bool CanSaveProductToFile => !string.IsNullOrEmpty(_productName) &&
+                                            !string.IsNullOrEmpty(_productCost) &&
+                                            !string.IsNullOrEmpty(_productPrice) &&
+                                            _priceRegex.IsMatch(ProductCost) &&
+                                            _priceRegex.IsMatch(ProductPrice);
 
         public void SaveProductToFile()
         {
@@ -114,9 +108,14 @@ namespace InventoryManager.ViewModels
                 if (columnName.Equals("ProductName") && !_initialProductName)
                 {
                     if (string.IsNullOrEmpty(ProductName))
+                    {
                         result = Resources.EnterProductName;
-                    if (!(ProductName is string))
-                        result = Resources.InvalidInput;
+                    }
+                    else
+                    {
+                        if (!(ProductName is string))
+                            result = Resources.InvalidInput;
+                    }
                 }
                 if (columnName.Equals("ProductCost") && !_initialProductCost)
                 {
