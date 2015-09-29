@@ -2,7 +2,35 @@
 {
     public class Product
     {
-        public string Name { get; set; }
+        private string _name;
+
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+            }
+        }
+
+        private string _supplier;
+
+        public string Supplier
+        {
+            get
+            {
+                return _supplier;
+            }
+            set
+            {
+                _supplier = value;
+            }
+        }
+
+        private double _price;
         public double Price {
             get
             {
@@ -27,7 +55,6 @@
                 _cost = value;
             }
         }
-        private double _price;
 
         public int Profit
         {

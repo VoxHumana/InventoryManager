@@ -11,8 +11,13 @@ namespace InventoryManager.ViewModels
     [Export(typeof (InventoryViewModel))]
     public class InventoryViewModel : PropertyChangedBase, IHandle<ProductInventoryEntry>
     {
+        public object EditProductModel { get; set; }
+
+        public NewProductViewModel NewProductModel { get; set; }
+
         private const string InventoryName = "Inventory";
         private readonly IEventAggregator _eventAggregator;
+        private readonly IWindowManager _windowManager = new WindowManager();
         private readonly string _filePath = Environment.CurrentDirectory + "\\" + InventoryName + ".xml";
 
         private readonly XmlSerializer _xmlSerializer =
@@ -22,10 +27,13 @@ namespace InventoryManager.ViewModels
         private ProductInventoryEntry _selectedEntry;
 
         [ImportingConstructor]
-        public InventoryViewModel(IEventAggregator eventAggregator)
+        public InventoryViewModel(IEventAggregator eventAggregator, NewProductViewModel newProductViewModel,
+            EditProductViewModel editProductModel)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
+            NewProductModel = newProductViewModel;
+            EditProductModel = editProductModel;
             InventoryEntries = new ObservableCollection<ProductInventoryEntry>();
             LoadInventoryFromXml();
         }
@@ -52,6 +60,25 @@ namespace InventoryManager.ViewModels
             }
         }
 
+        private string _quantity;
+        public string Quantity
+        {
+            get { return _quantity; }
+            set
+            {
+                _quantity = value;
+                NotifyOfPropertyChange(() => Quantity);
+            }
+        }
+
+        public bool CanEditEntry => SelectedEntry != null;
+
+        public void EditEntry()
+        {
+            if (SelectedEntry == null) return;
+            _eventAggregator.PublishOnUIThread(SelectedEntry);
+        }
+
         public bool CanDeleteEntry => SelectedEntry != null;
 
         public void DeleteEntry()
@@ -59,6 +86,11 @@ namespace InventoryManager.ViewModels
             if (SelectedEntry == null) return;
             InventoryEntries.Remove(InventoryEntries.First(e => e.Name.Equals(SelectedEntry.Name)));
             NotifyOfPropertyChange(() => InventoryEntries);
+        }
+
+        public void CreateNewEntry()
+        {
+            _windowManager.ShowDialog(NewProductModel);
         }
 
         private void LoadInventoryFromXml()

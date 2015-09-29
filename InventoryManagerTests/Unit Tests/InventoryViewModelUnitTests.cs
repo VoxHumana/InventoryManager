@@ -12,12 +12,16 @@ namespace InventoryManagerTests.Unit_Tests
     {
         private InventoryViewModel _inventoryViewModel;
         private Mock<IEventAggregator> _eventAggregatorMock;
+        private Mock<NewProductViewModel> _newProductModel;
+        private Mock<EditProductViewModel> _editProductModel;
 
         [SetUp]
         public void Init()
         {
             _eventAggregatorMock = new Mock<IEventAggregator>();
-            _inventoryViewModel = new InventoryViewModel(_eventAggregatorMock.Object);
+            _newProductModel = new Mock<NewProductViewModel>();
+            _editProductModel = new Mock<EditProductViewModel>();
+            _inventoryViewModel = new InventoryViewModel(_eventAggregatorMock.Object, _newProductModel.Object, _editProductModel.Object);
         }
 
         [Test]
