@@ -16,8 +16,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding InventoryEntries}"
-                  SelectedItem="{Binding SelectedEntry}"
+        <DataGrid ItemsSource="{Binding Inventory}"
+                  SelectedItem="{Binding Path=SelectedProduct, Mode=TwoWay}"
                   IsReadOnly="True" 
                   Grid.Column="0" 
                   Margin="8">
@@ -26,19 +26,31 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Grid.Row="1">
-            <Button x:Name="SaveInventoryToXml"
-                    ToolTip="{lex:Loc Save}"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top">
-                <Rectangle Fill="DeepSkyBlue"
+            <Button x:Name="CreateNewProduct"
+                    ToolTip="{lex:Loc CreateNewProduct}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center">
+                <Rectangle Fill="DodgerBlue"
                            Height="20"
                            Width="20">
                     <Rectangle.OpacityMask>
-                        <VisualBrush Visual="{StaticResource appbar_save}" Stretch="Fill" />
+                        <VisualBrush Visual="{StaticResource appbar_page_solid_add}" Stretch="Fill" />
                     </Rectangle.OpacityMask>
                 </Rectangle>
             </Button>
-            <Button x:Name="DeleteEntry"
+            <Button x:Name="EditProduct"
+                    ToolTip="{lex:Loc EditProduct}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center">
+                <Rectangle Fill="SpringGreen"
+                           Height="20"
+                           Width="20">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_page_edit}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
+            <Button x:Name="DeleteProduct"
                     ToolTip="{lex:Loc Delete}"
                     HorizontalAlignment="Center">
                 <Rectangle Fill="DimGray"

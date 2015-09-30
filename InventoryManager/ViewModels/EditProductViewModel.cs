@@ -21,7 +21,7 @@ namespace InventoryManager.ViewModels
         private readonly XmlSerializer _xmlSerializer = new XmlSerializer(typeof (Product));
         private readonly Regex _priceRegex;
         private string _oldProductName;
-        private string _productCost, _productName, _productPrice;
+        private string _productCost, _productName, _productPrice, _productSupplier;
 
         [ImportingConstructor]
         public EditProductViewModel(IEventAggregator eventAggregator)
@@ -63,7 +63,17 @@ namespace InventoryManager.ViewModels
                 NotifyOfPropertyChange(() => CanSaveEditedProduct);
             }
         }
-      
+
+        public string ProductSupplier
+        {
+            get { return _productSupplier; }
+            set
+            {
+                _productSupplier = value;
+                NotifyOfPropertyChange(() => ProductSupplier);
+            }
+        }
+
         public void Handle(Dictionary<string, Product> message)
         {
             if (!message.ContainsKey(EditProductMessage)) return;
@@ -71,6 +81,7 @@ namespace InventoryManager.ViewModels
             ProductName = message[EditProductMessage].Name;
             ProductCost = message[EditProductMessage].Cost.ToString(CultureInfo.InvariantCulture);
             ProductPrice = message[EditProductMessage].Price.ToString(CultureInfo.InvariantCulture);
+            ProductSupplier = message[EditProductMessage].Supplier.ToString(CultureInfo.InvariantCulture);
         }
         public bool CanSaveEditedProduct => !string.IsNullOrEmpty(_productName) &&
                                             !string.IsNullOrEmpty(_productCost) &&
@@ -84,7 +95,8 @@ namespace InventoryManager.ViewModels
             {
                 Name = ProductName,
                 Cost = Convert.ToDouble(ProductCost),
-                Price = Convert.ToDouble(ProductPrice)
+                Price = Convert.ToDouble(ProductPrice),
+                Supplier = ProductSupplier
             };
 
             var pathToDelete = _products.FullName + string.Format("\\{0}.xml", RemoveWhitespace(_oldProductName));

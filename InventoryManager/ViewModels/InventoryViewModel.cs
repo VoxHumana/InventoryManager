@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.IO;
@@ -9,22 +10,22 @@ using Caliburn.Micro;
 namespace InventoryManager.ViewModels
 {
     [Export(typeof (InventoryViewModel))]
-    public class InventoryViewModel : PropertyChangedBase, IHandle<ProductInventoryEntry>
+    public class InventoryViewModel : PropertyChangedBase, IHandle<Dictionary<string, Product>>
     {
         public object EditProductModel { get; set; }
 
         public NewProductViewModel NewProductModel { get; set; }
 
-        private const string InventoryName = "Inventory";
         private readonly IEventAggregator _eventAggregator;
         private readonly IWindowManager _windowManager = new WindowManager();
-        private readonly string _filePath = Environment.CurrentDirectory + "\\" + InventoryName + ".xml";
+        private readonly string _productsPath = Environment.CurrentDirectory + "\\products\\";
+        private const string SaveProductMessage = "saveProductMessage";
 
         private readonly XmlSerializer _xmlSerializer =
-            new XmlSerializer(typeof (ObservableCollection<ProductInventoryEntry>));
+            new XmlSerializer(typeof (Product));
 
-        private ObservableCollection<ProductInventoryEntry> _inventoryEntries;
-        private ProductInventoryEntry _selectedEntry;
+        private ObservableCollection<Product> _inventory;
+        private Product _selectedProduct;
 
         [ImportingConstructor]
         public InventoryViewModel(IEventAggregator eventAggregator, NewProductViewModel newProductViewModel,
@@ -34,29 +35,29 @@ namespace InventoryManager.ViewModels
             _eventAggregator.Subscribe(this);
             NewProductModel = newProductViewModel;
             EditProductModel = editProductModel;
-            InventoryEntries = new ObservableCollection<ProductInventoryEntry>();
+            Inventory = new ObservableCollection<Product>();
             LoadInventoryFromXml();
         }
 
-        public ProductInventoryEntry SelectedEntry
+        public Product SelectedProduct
         {
-            get { return _selectedEntry; }
+            get { return _selectedProduct; }
             set
             {
-                _selectedEntry = value;
-                NotifyOfPropertyChange(() => SelectedEntry);
-                NotifyOfPropertyChange(() => CanDeleteEntry);
+                _selectedProduct = value;
+                NotifyOfPropertyChange(() => SelectedProduct);
+                NotifyOfPropertyChange(() => CanDeleteProduct);
+                NotifyOfPropertyChange(() => CanEditProduct);
             }
         }
 
-        public ObservableCollection<ProductInventoryEntry> InventoryEntries
+        public ObservableCollection<Product> Inventory
         {
-            get { return _inventoryEntries; }
+            get { return _inventory; }
             set
             {
-                _inventoryEntries = value;
-                NotifyOfPropertyChange(() => InventoryEntries);
-                NotifyOfPropertyChange(() => CanSaveInventoryToXml);
+                _inventory = value;
+                NotifyOfPropertyChange(() => Inventory);
             }
         }
 
@@ -71,52 +72,52 @@ namespace InventoryManager.ViewModels
             }
         }
 
-        public bool CanEditEntry => SelectedEntry != null;
+        public bool CanEditProduct => SelectedProduct != null;
 
-        public void EditEntry()
+        public void EditProduct()
         {
-            if (SelectedEntry == null) return;
-            _eventAggregator.PublishOnUIThread(SelectedEntry);
+            if (SelectedProduct == null) return;
+            _eventAggregator.PublishOnUIThread(new Dictionary<string, Product>()
+            {
+                {"editProductMessage", SelectedProduct}
+            });
+            _windowManager.ShowDialog(EditProductModel);
         }
 
-        public bool CanDeleteEntry => SelectedEntry != null;
+        public bool CanDeleteProduct => SelectedProduct != null;
 
-        public void DeleteEntry()
+        public void DeleteProduct()
         {
-            if (SelectedEntry == null) return;
-            InventoryEntries.Remove(InventoryEntries.First(e => e.Name.Equals(SelectedEntry.Name)));
-            NotifyOfPropertyChange(() => InventoryEntries);
+            if (SelectedProduct == null) return;
+            Inventory.Remove(Inventory.First(e => e.Name.Equals(SelectedProduct.Name)));
+            NotifyOfPropertyChange(() => Inventory);
         }
 
-        public void CreateNewEntry()
+        public void CreateNewProduct()
         {
             _windowManager.ShowDialog(NewProductModel);
         }
 
         private void LoadInventoryFromXml()
         {
-            if (!File.Exists(_filePath)) return;
-            FileStream file = File.OpenRead(_filePath);
-            InventoryEntries = (ObservableCollection<ProductInventoryEntry>) _xmlSerializer.Deserialize(file);
-            file.Close();
+            var d = new DirectoryInfo(_productsPath);
+            if (!d.Exists)
+                d.Create();
+            var productList = new ObservableCollection<Product>();
+            foreach (var productFile in d.GetFiles("*.xml"))
+            {
+                using (var stream = new FileStream(_productsPath + productFile.Name, FileMode.Open))
+                {
+                    var product = (Product)_xmlSerializer.Deserialize(stream);
+                    productList.Add(product);
+                }
+            }
+            Inventory = productList;
         }
-
-        public bool CanSaveInventoryToXml => InventoryEntries != null &&
-                                             (InventoryEntries.Count > 0);
-        public void SaveInventoryToXml()
+        public void Handle(Dictionary<string, Product> message)
         {
-            var file = File.Create(_filePath);
-            _xmlSerializer.Serialize(file, InventoryEntries);
-            file.Close();
-        }
-
-        public void Handle(ProductInventoryEntry newEntry)
-        {
-            if (newEntry == null) return;
-            InventoryEntries.Add(newEntry);
-            SaveInventoryToXml();
-            NotifyOfPropertyChange(() => InventoryEntries);
-            NotifyOfPropertyChange(() => CanSaveInventoryToXml);
+            if (!message.ContainsKey(SaveProductMessage)) return;
+            LoadInventoryFromXml();
         }
     }
 }

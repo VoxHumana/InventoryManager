@@ -160,6 +160,15 @@ namespace InventoryManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter product supplier.
+        /// </summary>
+        public static string EnterProductSupplier {
+            get {
+                return ResourceManager.GetString("EnterProductSupplier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter quantity.
         /// </summary>
         public static string EnterQuantity {

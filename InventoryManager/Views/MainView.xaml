@@ -36,12 +36,6 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch" />
             </controls:MetroTabItem>
-            <controls:MetroTabItem Header="{lex:Loc Product}">
-                <vw:ProductListView
-                    cal:Bind.Model="{Binding ProductListModel}"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"/>
-            </controls:MetroTabItem>
         </controls:MetroAnimatedSingleRowTabControl>
     </Grid>
 </controls:MetroWindow>

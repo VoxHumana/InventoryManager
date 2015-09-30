@@ -15,7 +15,7 @@ namespace InventoryManager.ViewModels
     public class NewProductViewModel : PropertyChangedBase, IDataErrorInfo
     {
         private Product _product;
-        private string _productName, _productPrice, _productCost;
+        private string _productName, _productPrice, _productCost, _productSupplier;
         private bool _initialProductName, _initialProductPrice, _initialProductCost;
         private readonly Regex _priceRegex;
         private readonly IEventAggregator _eventAggregator;
@@ -38,6 +38,16 @@ namespace InventoryManager.ViewModels
                 NotifyOfPropertyChange(() => ProductName);
                 NotifyOfPropertyChange(() => CanSaveProductToFile);
                 _initialProductName = false;
+            }
+        }
+
+        public string ProductSupplier
+        {
+            get { return _productSupplier; }
+            set
+            {
+                _productSupplier = value;
+                NotifyOfPropertyChange(() => ProductSupplier);
             }
         }
 
@@ -77,7 +87,8 @@ namespace InventoryManager.ViewModels
             {
                 Name = ProductName,
                 Price = Convert.ToDouble(ProductPrice),
-                Cost = Convert.ToDouble(ProductCost)
+                Cost = Convert.ToDouble(ProductCost),
+                Supplier = ProductSupplier
             };
 
             if (!_products.Exists)

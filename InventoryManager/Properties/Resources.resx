@@ -192,4 +192,8 @@
     <value>Language</value>
     <comment>The selected language of the application</comment>
   </data>
+  <data name="EnterProductSupplier" xml:space="preserve">
+    <value>Enter product supplier</value>
+    <comment>Watermark for enter product supplier</comment>
+  </data>
 </root>

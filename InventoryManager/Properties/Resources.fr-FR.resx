@@ -180,4 +180,7 @@
   <data name="Language" xml:space="preserve">
     <value>Langue</value>
   </data>
+  <data name="EnterProductSupplier" xml:space="preserve">
+    <value>Entrez fournisseur de produits</value>
+  </data>
 </root>

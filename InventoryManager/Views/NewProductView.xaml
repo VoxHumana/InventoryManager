@@ -11,12 +11,13 @@
                       WindowStartupLocation="CenterScreen"
                       ResizeMode="CanResizeWithGrip"
                       MinWidth="300"
-                      MinHeight="325"
+                      MinHeight="400"
                       Width="300"
-                      Height="325"
+                      Height="400"
                       Title="{lex:Loc CreateNewProduct}">
     <Grid Margin="25">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -43,8 +44,15 @@
                  controls:TextBoxHelper.ClearTextButton="True"
                  Grid.Row="2" 
                  Margin="10" />
+        <TextBox Text="{Binding ProductSupplier}"
+                 controls:TextBoxHelper.Watermark="{lex:Loc EnterProductSupplier}" 
+                 controls:TextBoxHelper.UseFloatingWatermark="True"
+                 controls:TextBoxHelper.IsWaitingForData="True"
+                 controls:TextBoxHelper.ClearTextButton="True"
+                 Grid.Row="3" 
+                 Margin="10" />
         <StackPanel Orientation="Horizontal" 
-                    Grid.Row="3" 
+                    Grid.Row="4" 
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom">
             <Button x:Name="SaveProductToFile"
