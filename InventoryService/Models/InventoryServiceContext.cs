@@ -15,12 +15,11 @@ namespace InventoryService.Models
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
     
-        public InventoryServiceContext() : base("name=InventoryServiceContext")
+        public InventoryServiceContext() : base("InventoryServiceContext")
         {
         }
 
-        public System.Data.Entity.DbSet<InventoryService.Models.Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
 
-        public System.Data.Entity.DbSet<InventoryService.Models.ProductInventoryEntry> ProductInventoryEntries { get; set; }
     }
 }
